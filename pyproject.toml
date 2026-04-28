@@ -29,13 +29,15 @@ dev = [
 ]
 
 [tool.ruff]
+line-length = 88
+indent-width = 4
 exclude = [
     ".git",
     ".pyenv",
     ".pytest_cache",
     ".pytype",
     ".ruff_cache",
-     ".venv"
+    ".venv"
 ]
 
 [tool.ruff.lint]
@@ -43,7 +45,7 @@ extend-select = [
     "UP", # pyupgrade
     "D",  # pydocstyle
     "N",  # PEP8 names
-    "I"  # isort
+    "I"   # isort
 ]
 ignore = ["D100", "D203", "D213"]
 

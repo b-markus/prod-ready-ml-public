@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from loguru import logger
 
 
 def add_features(df: pd.DataFrame) -> pd.DataFrame:
@@ -16,6 +17,7 @@ def add_features(df: pd.DataFrame) -> pd.DataFrame:
         DataFrame with some column features added
 
     """
+    logger.info("Starting to process features")
     df["is_dog"] = check_is_dog(df["animal_type"])
     df["has_name"] = check_has_name(df["name"])
     df["sex"] = get_sex(df["sex_upon_outcome"])
@@ -23,6 +25,7 @@ def add_features(df: pd.DataFrame) -> pd.DataFrame:
     df["hair_type"] = get_hair_type(df["breed"])
     df["days_upon_outcome"] = compute_days_upon_outcome(df["age_upon_outcome"])
 
+    logger.info("Finished adding features")
     return df
 
 
@@ -43,7 +46,9 @@ def check_is_dog(animal_type: pd.Series) -> pd.Series:
     # Check if it's either a cat or a dog.
     is_cat_dog = animal_type.str.lower().isin(["dog", "cat"])
     if not is_cat_dog.all():
-        print("Found something else but dogs and cats:\n%s", animal_type[~is_cat_dog])
+        logger.error(
+            "Found something else but dogs and cats:\n%s", animal_type[~is_cat_dog]
+        )
         raise RuntimeError("Found pets that are not dogs or cats.")
     is_dog = animal_type.str.lower() == "dog"
 

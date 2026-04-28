@@ -1,6 +1,7 @@
 import re
 
 import pandas as pd
+from loguru import logger
 
 
 def load_data(path: str) -> pd.DataFrame:
@@ -17,17 +18,22 @@ def load_data(path: str) -> pd.DataFrame:
         DataFrame with data
 
     """
+    logger.info(f"Loading data from: {path}")
     df = (
         pd.read_csv(path, parse_dates=["DateTime"])
         .rename(columns=lambda x: x.replace("upon", "Upon"))
         .rename(columns=convert_camel_case)
         .fillna("Unknown")
     )
+    logger.info(f"Loaded data with {len(df)} rows")
+
     return df
 
 
 def convert_camel_case(name: str) -> str:
     """Convert camelCaseString or strings with whitespace to snake_case_string."""
+    logger.debug("Converting camelCaseString or strings to snake_case_string.")
+
     # 1) Normalize whitespace to single underscores
     name = re.sub(r"\s+", "_", name.strip())
 

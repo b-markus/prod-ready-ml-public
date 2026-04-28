@@ -9,25 +9,41 @@ repos:
     -   id: check-yaml
 #    -   id: check-added-large-files
 
--   repo: local
+#-   repo: local
+#    # Ruff version is not added when using a local setup
+#    hooks:
+#      - id: ruff-format
+#        name: Ruff Format
+#        entry: ruff format .
+#        language: system
+#        types_or: [ python, pyi, pyproject ]
+#
+#      - id: ruff-lint
+#        name: Ruff Lint
+#        entry: ruff check .
+#        language: system
+#        types_or: [ python, jupyter, pyi, pyproject ]
+#
+#      - id: ruff-lint-fix
+#        name: Ruff Lint (Autofix)
+#        entry: ruff check --fix .
+#        language: system
+#        types: [ python, pyi, jupyter, pyproject ]
+
+-   repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
+    rev: v0.15.12
     hooks:
-      #### Run the linter.
-      ###- id: ruff-check
-      ###  types_or: [ python, pyi, pyproject ]
-      ###  args: [ --fix ]
-      #### Run the formatter.
-      ###- id: ruff-format
-      ###  types_or: [ python, pyi ]
-
-      - id: ruff-lint
-        name: Ruff Lint
-        entry: ruff check .
-        language: system
-        types_or: [ python, pyi, pyproject ]
-
+      # Run the linter.
+      - id: ruff-check
+        types_or: [ python, pyi, jupyter, pyproject ]
+        args: [ --fix ]
+      # Run the formatter.
       - id: ruff-format
-        name: Ruff Format
-        entry: ruff format .
-        language: system
-        types_or: [ python, pyi ]
+        types_or: [ python, pyi, jupyter ]
+
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.5.1  # use the latest stable version
+    hooks:
+      - id: mypy
+    #args: [ --strict, --ignore-missing-imports ]

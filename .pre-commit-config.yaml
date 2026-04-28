@@ -31,15 +31,15 @@ repos:
         types_or: [python, pyi, pyproject]
         args: ["check", "--fix"]
 
-      # -----------------------------------------
-      # Jupyter Notebook formatting (Ruff format)
-      # -----------------------------------------
-      - id: ruff-format-notebooks
-        name: Ruff Format (Jupyter)
-        entry: ruff
-        language: system
-        types_or: [jupyter]
-        args: ["format"]
+      ## -----------------------------------------
+      ## Jupyter Notebook formatting (Ruff format)
+      ## -----------------------------------------
+      #- id: ruff-format-notebooks
+      #  name: Ruff Format (Jupyter)
+      #  entry: ruff
+      #  language: system
+      #  types_or: [jupyter]
+      #  args: ["format"]
 
       ## -----------------------------------------
       ## Jupyter Notebook linting (with autofix)

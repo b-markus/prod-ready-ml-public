@@ -43,7 +43,7 @@ extend-select = [
     "N",  # PEP8 names
     "I"  # isort
 ]
-ignore = ["D203", "D213"]
+ignore = ["D100", "D203", "D213"]
 
 [tool.ruff.format]
 # Like Black, use double quotes for strings.

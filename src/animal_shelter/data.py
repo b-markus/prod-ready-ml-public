@@ -27,6 +27,15 @@ def load_data(path: str) -> pd.DataFrame:
 
 
 def convert_camel_case(name: str) -> str:
-    """Convert camelCaseString to snake_case_string."""
-    s1 = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)
-    return re.sub("([a-z0-9])([A-Z])", r"\1_\2", s1).lower()
+    """Convert camelCaseString or strings with whitespace to snake_case_string."""
+    # 1) Normalize whitespace to single underscores
+    name = re.sub(r"\s+", "_", name.strip())
+
+    # 2) Split camelCase / PascalCase
+    s1 = re.sub(r"(.)([A-Z][a-z]+)", r"\1_\2", name)
+    s2 = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", s1)
+
+    # 3) Collapse multiple underscores and trim leading/trailing ones
+    s2 = re.sub(r"_+", "_", s2).strip("_")
+
+    return s2.lower()

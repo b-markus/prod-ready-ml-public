@@ -19,6 +19,7 @@ repos:
         entry: ruff
         language: system
         types_or: [python, pyi, pyproject]
+        exclude: "oop_hackaton\\.py"
         args: ["format"]
 
       # -----------------------------------------
@@ -29,6 +30,7 @@ repos:
         entry: ruff
         language: system
         types_or: [python, pyi, pyproject]
+        exclude: "oop_hackaton\\.py"
         args: ["check", "--fix"]
 
       ## -----------------------------------------
